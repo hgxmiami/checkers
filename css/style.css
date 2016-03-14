@@ -1,12 +1,11 @@
 div#game {
-    position:relative;
+   position:relative;
 }
 
 
 div#board {
     
     float:left;
-    
     
     height:382px;
     width:382px;
@@ -108,4 +107,8 @@ div.piece.dark {
 
 div#meta {
     float:right;
+}
+
+#game {
+    margin: auto 0;
 }

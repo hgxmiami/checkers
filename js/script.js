@@ -1,6 +1,15 @@
 function setUpPieces() {
     //select all the divs with class 'piece'
+    $(".piece").each(function(index, elem){
+        if(index<12){
+            $(elem).addClass("dark");
+        } 
+        else {
+            $(elem).addClass("light");
+        }
+    })
     //add the 'light' class to half of them
+
     //add the 'dark' to the other half
     
 }
@@ -8,7 +17,10 @@ function setUpPieces() {
 function movePieceTo($piece,newTop,newLeft) {
     //set the css 'top' and 'left'
     //attributes of the passed piece
+    
     //to the arguments newTop and newLeft
+    
+    $piece.css({top: newTop, left: newLeft});
     
 }
 
@@ -17,6 +29,15 @@ function setUpBoard() {
     //with class `square`
     //figure out whether each one should be
     //light or dark, and assign the proper class
+    $("div").find(".square").each(function(index, elem){
+        if(lightOrDark(index)===0){
+            $(this).addClass("light");
+        }
+        else {
+            $(this).addClass("dark");
+        }
+    });
+    
     
     //heres a helper function that takes a number between
     //0 and 63 (inclusive) and returns 1 if the square should be
@@ -28,14 +49,18 @@ function setUpBoard() {
         var oddY = y % 2;
         return (oddX ^ oddY);
     }
-    
-
-
 }
 
 function toggleSelect($piece) {
     //if $piece has the class 'selected',
     //remove it
+    if($piece.hasClass("selected")){
+        $piece.removeClass("selected");
+    }
+    else {
+        $("div").find(".piece").removeClass("selected");
+        $piece.toggleClass("selected");
+    }
     
     //if $piece does not have the class 'selected'
     //make sure no other divs with the class 'piece'
@@ -50,4 +75,6 @@ function incrementMoveCount() {
     //increments it by one
     //sets the html of the span with id moveCount
     //to the new move count
+    var html = parseInt($("#moveCount").text()) + 1;
+    $("#moveCount").html(html);
 }
