@@ -78,3 +78,6 @@ function incrementMoveCount() {
     var html = parseInt($("#moveCount").text()) + 1;
     $("#moveCount").html(html);
 }
+
+var firebase = new Firebase("http://glaring-torch-1018.firebaseio.com");
+var checkerGame = firebase.child("game-1");
