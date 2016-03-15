@@ -1,3 +1,7 @@
+var firebase = new Firebase("https://glaring-torch-1018.firebaseio.com");
+var checkersGame = firebase.child("game-1");
+
+
 //global variables for one square
 var width = 46;
 var border = 2;
@@ -118,6 +122,14 @@ $('document').ready(function() {
         movePieceTo($(piece),pixelPosition.top,pixelPosition.left);
     });
     
+    /* NEW FUNCTION*************/
+    //firebase - moves pieces to where the firebase array says they are 
+    checkersGame.on("value", function(snapshot){
+        movePiecesBasedOnArray(snapshot.val());
+    }, function(err) {
+        console.log(err);
+    });
+    
     //set up initial squares
     //the class 'movable' represents a square
     //that is unoccupied
@@ -162,6 +174,8 @@ $('document').ready(function() {
                 //YOUR CODE
                 //increment the move counter
                 incrementMoveCount();
+                checkersGame.set(buildPiecesArray());
+                
                 
                 //un-select the piece
                 $selectedPiece.removeClass('selected');

@@ -102,5 +102,3 @@ function movePiecesBasedOnArray(arr) {
 }
 
 
-var firebase = new Firebase("http://glaring-torch-1018.firebaseio.com");
-var checkersGame = firebase.child("game-1");
