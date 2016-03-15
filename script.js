@@ -79,5 +79,28 @@ function incrementMoveCount() {
     $("#moveCount").html(html);
 }
 
+function buildPiecesArray () {
+    var pieces = [];
+    $(".piece").each(function (i, e){
+        var yCoord = $(e).css("top");
+        yCoord = yCoord.substring(0, yCoord.length-2);
+        var xCoord = $(e).css("left");
+        xCoord = xCoord.substring(0, xCoord.length-2);
+        var coords = getCoords(yCoord, xCoord);
+        coords.color = $(e).hasClass("light")?"light":"dark";
+        pieces.push(coords);
+    });
+    return pieces;
+} 
+
+function movePiecesBasedOnArray(arr) {
+    console.log(arr);
+    $(".piece").each( function(i, e) {
+        var cssTopLeft= getPixels(arr[i].x, arr[i].y);
+        $(e).css(cssTopLeft);
+    });
+}
+
+
 var firebase = new Firebase("http://glaring-torch-1018.firebaseio.com");
-var checkerGame = firebase.child("game-1");
+var checkersGame = firebase.child("game-1");
